@@ -1,2 +1,2 @@
 # haxerune
-basicly deltarune ported to haxe
+wip deltarune port to haxe
