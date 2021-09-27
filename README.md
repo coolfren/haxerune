@@ -1,2 +1,2 @@
 # haxerune
-basic;y deltarune ported to haxe
+basicly deltarune ported to haxe
