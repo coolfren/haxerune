@@ -14,7 +14,7 @@ class PlayState extends FlxState
     }
     override public function create()
     {
-        FlxG.sound.playMusic('assets/mus/cyber.ogg',1,true);
+        FlxG.sound.playMusic('assets/mus/spamton_neo_mix_ex_wip.ogg',1,true);
         kris = new Player();
         add(kris);
     }

@@ -26,7 +26,7 @@ class Player extends FlxSprite
         animation.addByPrefix('Up', 'Up', 5, true);
         animation.addByPrefix('Left','Left',5,true);
         animation.addByPrefix('Right','Right',5,true);
-        //animation.play('Down');
+        animation.play('Down');
     }
     override public function update(elapsed:Float):Void
         {
@@ -57,11 +57,20 @@ class Player extends FlxSprite
                     trace('chu are stopped');
                 }
                 //Cancel out opposite directions
-                if (_up && _down)
+                if (_up && _down){
+                    if(animation.curAnim != null && !_left && !_right){
+                        animation.curAnim.stop();
+                        animation.curAnim.curFrame = 0;
+                    }
                     _up = _down = false;
-                if (_left && _right)
+                }
+                if (_left && _right){
+                    if(animation.curAnim != null && !_up && !_down){
+                        animation.curAnim.stop();
+                        animation.curAnim.curFrame = 0;
+                    }
                     _left = _right = false;
-                
+                }
                 // If actually moving, set angle
                 if (_up || _down || _left || _right){
                     
