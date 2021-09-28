@@ -1,0 +1,51 @@
+{ "frames": {
+   "Idle instance 0": {
+    "frame": { "x": 0, "y": 0, "w": 54, "h": 45 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 54, "h": 45 },
+    "sourceSize": { "w": 54, "h": 45 },
+    "duration": 100
+   },
+   "Idle instance 1": {
+    "frame": { "x": 54, "y": 0, "w": 54, "h": 45 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 54, "h": 45 },
+    "sourceSize": { "w": 54, "h": 45 },
+    "duration": 100
+   },
+   "Idle instance 2": {
+    "frame": { "x": 0, "y": 45, "w": 54, "h": 45 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 54, "h": 45 },
+    "sourceSize": { "w": 54, "h": 45 },
+    "duration": 100
+   },
+   "Idle instance 3": {
+    "frame": { "x": 54, "y": 45, "w": 54, "h": 45 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 54, "h": 45 },
+    "sourceSize": { "w": 54, "h": 45 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.2.21-dev",
+  "image": "SusieBattle..png",
+  "format": "RGBA8888",
+  "size": { "w": 108, "h": 90 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Idle", "from": 0, "to": 3, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
