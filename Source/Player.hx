@@ -23,11 +23,12 @@ class Player extends FlxSprite
         trace("*god FUCKING damnit KRIS where the FUCK are we?!");
         trace("*we're at " + x + " " + y);
         drag.x = drag.y = 1600;
+        //basicly the same to character.hx in fnf lmao just bit dif
         switch(char){
             case 'kris':
             frames = FlxAtlasFrames.fromTexturePackerJson('assets/characters/Kris.png', Assets.getText('assets/characters/Kris.json'));
             //trace(frames.length);
-            setGraphicSize(Std.int(width * 1.5));
+            setGraphicSize(Std.int(width * 2));
             animation.addByPrefix('Down', 'Down', 5, true);
             animation.addByPrefix('Up', 'Up', 5, true);
             animation.addByPrefix('Left','Left',5,true);
