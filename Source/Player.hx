@@ -16,16 +16,23 @@ class Player extends FlxSprite
     var _run:Bool = false;
     public var speed:Float = 100;
     var framerate = 5;
-    public function new(?X:Float=0, ?Y:Float=0) {
-        super(x,y);
+    public function new(?X:Float=0, ?Y:Float=0, char) {
+        //this.x = x;
+        //this.y = y;
+        super(X,Y);
+        trace("*god FUCKING damnit KRIS where the FUCK are we?!");
+        trace("*we're at " + x + " " + y);
         drag.x = drag.y = 1600;
-        frames = FlxAtlasFrames.fromTexturePackerJson('assets/characters/Kris.png', Assets.getText('assets/characters/Kris.json'));
-        //trace(frames.length);
-        setGraphicSize(Std.int(width * 3));
-        animation.addByPrefix('Down', 'Down', 5, true);
-        animation.addByPrefix('Up', 'Up', 5, true);
-        animation.addByPrefix('Left','Left',5,true);
-        animation.addByPrefix('Right','Right',5,true);
+        switch(char){
+            case 'kris':
+            frames = FlxAtlasFrames.fromTexturePackerJson('assets/characters/Kris.png', Assets.getText('assets/characters/Kris.json'));
+            //trace(frames.length);
+            setGraphicSize(Std.int(width * 1.5));
+            animation.addByPrefix('Down', 'Down', 5, true);
+            animation.addByPrefix('Up', 'Up', 5, true);
+            animation.addByPrefix('Left','Left',5,true);
+            animation.addByPrefix('Right','Right',5,true);
+        }
         animation.play('Down');
     }
     override public function update(elapsed:Float):Void
@@ -54,7 +61,7 @@ class Player extends FlxSprite
                         animation.curAnim.stop();
                         animation.curAnim.curFrame = 0;
                     }
-                    trace('chu are stopped');
+                    //trace('chu are stopped');
                 }
                 //Cancel out opposite directions
                 if (_up && _down){
@@ -80,8 +87,6 @@ class Player extends FlxSprite
                     {
                         
                         animation.play('Up', false);
-                        //animation.curAnim.resume();
-                        animation.curAnim.frameRate = 5;
                         mA = -90;
                         if (_left)
                             mA -= 45;
@@ -92,8 +97,6 @@ class Player extends FlxSprite
                     {
                         
                         animation.play('Down');
-                        //animation.curAnim.resume();
-                        animation.curAnim.frameRate = 5;
                         mA = 90;
                         if (_left)
                             mA += 45;
@@ -102,13 +105,9 @@ class Player extends FlxSprite
                     }
                     else if (_left){
                         animation.play('Left');
-                        //animation.curAnim.resume();
-                        animation.curAnim.frameRate = 5;
                         mA = 180;
                     }else if (_right){
                         animation.play('Right');
-                        //animation.curAnim.resume();
-                        animation.curAnim.frameRate = 5;
                         mA = 0;
                     }
                     
