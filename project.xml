@@ -3,7 +3,6 @@
 	
 	<meta title="HaxeRune" package="com.sample.haxerune" version="1.0.0" company="Company Name" />
 	<app main="Main" path="Export" file="HaxeRune" />
-	
 	<source path="Source" />
 	<set name="BUILD_DIR" value="export/debug" if="debug" />
 	<set name="BUILD_DIR" value="export/release" unless="debug" />
@@ -13,12 +12,14 @@
 	<window width="640" height="480" fps="" background="#000000" hardware="true" vsync="false" />
 	
 	<assets path="Assets" rename="assets" />
-	<haxelib name="openfl-aseprite" />
 	<haxelib name="flixel" />
 	<haxedev set='webgl' />
 	<haxelib name="flixel-addons" />
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	<haxelib name="random"/>
+	<haxelib name="discord_rpc" if="desktop"/>
+	<haxelib name="hscript"/>
 	
 </project>
