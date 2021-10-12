@@ -11,15 +11,16 @@ class FightChar extends FlxSprite{
         //Player.hx with changes ig
         switch(char){
             case 'kris':
-                frames = FlxAtlasFrames.fromTexturePackerJson('assets/characters/KrisBattle.png', Assets.getText('assets/characters/KrisBattle.json'));
+                frames = Paths.fromJson('assets/characters/KrisBattle');
+                trace(frames.frames.length);
                 setGraphicSize(Std.int(width * 2));
                 animation.addByPrefix('Idle', 'Idle', 5, true);
             case 'susie':
-                frames = FlxAtlasFrames.fromTexturePackerJson('assets/characters/SusieBattle.png', Assets.getText('assets/characters/SusieBattle.json'));
+                frames = Paths.fromJson('assets/characters/SusieBattle');
                 setGraphicSize(Std.int(width * 2));
                 animation.addByPrefix('Idle', 'Idle', 5, true);
             case 'ralsei':
-                frames = FlxAtlasFrames.fromTexturePackerJson('assets/characters/RalseiBattle.png', Assets.getText('assets/characters/RalseiBattle.json'));
+                frames = Paths.fromJson('assets/characters/RalseiBattle');
                 setGraphicSize(Std.int(width * 2));
                 animation.addByPrefix('Idle', 'Idle', 5, true);
         }

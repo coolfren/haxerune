@@ -9,16 +9,18 @@ class Player extends FlxSprite
 {
     private var dx:Int = 0;
     private var dy:Int = 0;
-    var _up:Bool = false;
-    var _down:Bool = false;
-    var _left:Bool = false;
-    var _right:Bool = false;
+    public var _up:Bool = false;
+    public var _down:Bool = false;
+    public var _left:Bool = false;
+    public var _right:Bool = false;
     var _run:Bool = false;
     public var speed:Float = 100;
     var framerate = 5;
-    public function new(?X:Float=0, ?Y:Float=0, char) {
+    var playable:Bool;
+    public function new(?X:Float=0, ?Y:Float=0, char, ?playablevar:Bool=true) {
         //this.x = x;
         //this.y = y;
+        playable = playablevar;
         super(X,Y);
         trace("*god FUCKING damnit KRIS where the FUCK are we?!");
         trace("*we're at " + x + " " + y);
@@ -26,7 +28,7 @@ class Player extends FlxSprite
         //basicly the same to character.hx in fnf lmao just bit dif
         switch(char){
             case 'kris':
-            frames = FlxAtlasFrames.fromTexturePackerJson('assets/characters/Kris.png', Assets.getText('assets/characters/Kris.json'));
+            frames = Paths.fromJson('assets/characters/Kris');
             //trace(frames.length);
             setGraphicSize(Std.int(width * 2));
             animation.addByPrefix('Down', 'Down', 5, true);
@@ -50,13 +52,13 @@ class Player extends FlxSprite
         }
         function movement():Void
             {
-                
-        
                 // When desired key is pressed
-                _up = FlxG.keys.anyPressed([UP, W]);
-                _down = FlxG.keys.anyPressed([DOWN, S]);
-                _left = FlxG.keys.anyPressed([LEFT, A]);
-                _right = FlxG.keys.anyPressed([RIGHT, D]);
+                if(playable){
+                    _up = FlxG.keys.anyPressed([UP, W]);
+                    _down = FlxG.keys.anyPressed([DOWN, S]);
+                    _left = FlxG.keys.anyPressed([LEFT, A]);
+                    _right = FlxG.keys.anyPressed([RIGHT, D]);
+                }
                 if(!_up && !_down && !_right && !_left){
                     if(animation.curAnim != null){
                         animation.curAnim.stop();

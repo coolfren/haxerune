@@ -5,6 +5,12 @@ import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxGame;
 import openfl.Assets;
+#if !neko
+#if desktop
+import Discord.DiscordClient;
+import sys.thread.Thread;
+#end
+#end
 
 class FightScene extends FlxState
 {
@@ -34,5 +40,17 @@ class FightScene extends FlxState
         add(kris);
         add(susie);
         add(ralsei);
+        #if !neko
+        #if desktop
+        DiscordClient.changePresence('Jus Fighting (maybe if this is implemented yet uwu)', 'Fighting'); 
+        #end
+        #end
+    }
+    override public function update(elapsed:Float){
+        super.update(elapsed);
+        //debug testing for fighting ig
+        if (FlxG.keys.justPressed.SEVEN)
+            FlxG.switchState(new Cutscene());
+
     }
 }
