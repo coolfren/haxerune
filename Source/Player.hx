@@ -24,7 +24,7 @@ class Player extends FlxSprite
         super(X,Y);
         trace("*god FUCKING damnit KRIS where the FUCK are we?!");
         trace("*we're at " + x + " " + y);
-        drag.x = drag.y = 1600;
+        // drag.x = drag.y = 1600;
         //basicly the same to character.hx in fnf lmao just bit dif
         switch(char){
             case 'kris':
@@ -47,76 +47,57 @@ class Player extends FlxSprite
                 speed = 100;
             // Thus movement logic will run every frame
             movement();
+            animations();
            
             super.update(elapsed);
         }
-        function movement():Void
-            {
-                // When desired key is pressed
-                if(playable){
-                    _up = FlxG.keys.anyPressed([UP, W]);
-                    _down = FlxG.keys.anyPressed([DOWN, S]);
-                    _left = FlxG.keys.anyPressed([LEFT, A]);
-                    _right = FlxG.keys.anyPressed([RIGHT, D]);
-                }
-                if(!_up && !_down && !_right && !_left){
-                    if(animation.curAnim != null){
-                        animation.curAnim.stop();
-                        animation.curAnim.curFrame = 0;
-                    }
-                    //trace('chu are stopped');
-                }
-                //Cancel out opposite directions
-                if (_up && _down){
-                    if(animation.curAnim != null && !_left && !_right){
-                        animation.curAnim.stop();
-                        animation.curAnim.curFrame = 0;
-                    }
-                    _up = _down = false;
-                }
-                if (_left && _right){
-                    if(animation.curAnim != null && !_up && !_down){
-                        animation.curAnim.stop();
-                        animation.curAnim.curFrame = 0;
-                    }
-                    _left = _right = false;
-                }
-                // If actually moving, set angle
-                if (_up || _down || _left || _right){
-                    
-                    // Initialize angle
-                    var mA:Float = 0;            
-                    if (_up)
-                    {
-                        
-                        animation.play('Up', false);
-                        mA = -90;
-                        if (_left)
-                            mA -= 45;
-                        else if (_right)
-                            mA += 45;
-                    }
-                    else if (_down)
-                    {
-                        
-                        animation.play('Down');
-                        mA = 90;
-                        if (_left)
-                            mA += 45;
-                        else if (_right)
-                            mA -= 45;
-                    }
-                    else if (_left){
-                        animation.play('Left');
-                        mA = 180;
-                    }else if (_right){
-                        animation.play('Right');
-                        mA = 0;
-                    }
-                    
-                    //Add magnitude to the velocity vector in mA angle direction
-                    velocity.set(speed, 0);
-                    velocity.rotate(FlxPoint.weak(0, 0), mA);
-                }
-            }
+
+    private function movement() {
+        if (playable) {
+            _up = FlxG.keys.anyPressed([UP, W]);
+            _down = FlxG.keys.anyPressed([DOWN, S]);
+            _left = FlxG.keys.anyPressed([LEFT, A]);
+            _right = FlxG.keys.anyPressed([RIGHT, D]);
+        }
+
+        if (_up) {
+            velocity.y = -speed;
+        } else if (_down) {
+            velocity.y = speed;
+        } else {
+            velocity.y = 0;
+        }
+
+        if (_left) {
+            velocity.x = -speed;
+        } else if (_right) {
+            velocity.x = speed;
+        } else {
+            velocity.x = 0;
+        }
+    }
+
+    private function animations() {
+        if (playable) {
+            _up = FlxG.keys.anyPressed([UP, W]);
+            _down = FlxG.keys.anyPressed([DOWN, S]);
+            _left = FlxG.keys.anyPressed([LEFT, A]);
+            _right = FlxG.keys.anyPressed([RIGHT, D]);
+        }
+
+        if (_up) {
+            animation.play('Up');
+        } else if (_down) {
+            animation.play('Down');
+        } else if (_left) {
+            animation.play('Left');
+        } else if (_right) {
+            animation.play('Right');
+        }
+
+        if (velocity.x == 0 && velocity.y == 0) {
+            animation.stop();
+            animation.curAnim.curFrame = 0;
+        }
+    }
 }

@@ -10,7 +10,7 @@ class Cutscene extends FlxState
     var yy:Float = 0;
 
     var kris:Player;
-    function new()
+   public function new()
         {
             super();
             kris = new Player(FlxG.width / 2, FlxG.height / 2, "kris", false);

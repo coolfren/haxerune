@@ -1,4 +1,5 @@
 package;
+
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.FlxState;
@@ -18,7 +19,7 @@ class FightScene extends FlxState
     var kris:FightChar;
     var susie:FightChar;
     var ralsei:FightChar;
-    function new(){
+    public function new(){
         //just for fighting ig
         super();
         BG = new FlxSprite(-50,-50);
