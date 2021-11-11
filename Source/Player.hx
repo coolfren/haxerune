@@ -7,6 +7,9 @@ import flixel.FlxG;
 import flixel.math.FlxPoint;
 class Player extends FlxSprite
 {
+
+    private var controls:Controls;
+
     private var dx:Int = 0;
     private var dy:Int = 0;
     public var _up:Bool = false;
@@ -18,8 +21,9 @@ class Player extends FlxSprite
     var framerate = 5;
     var playable:Bool;
     public function new(?X:Float=0, ?Y:Float=0, char, ?playablevar:Bool=true) {
-        //this.x = x;
-        //this.y = y;
+        
+        controls = new Controls("default");
+
         playable = playablevar;
         super(X,Y);
         trace("*god FUCKING damnit KRIS where the FUCK are we?!");
@@ -49,28 +53,26 @@ class Player extends FlxSprite
             movement();
             animations();
            
+            if (playable) {
+                controls.setChecks();
+            }
+
             super.update(elapsed);
         }
 
     private function movement() {
-        if (playable) {
-            _up = FlxG.keys.anyPressed([UP, W]);
-            _down = FlxG.keys.anyPressed([DOWN, S]);
-            _left = FlxG.keys.anyPressed([LEFT, A]);
-            _right = FlxG.keys.anyPressed([RIGHT, D]);
-        }
 
-        if (_up) {
+        if (controls.up) {
             velocity.y = -speed;
-        } else if (_down) {
+        } else if (controls.down) {
             velocity.y = speed;
         } else {
             velocity.y = 0;
         }
 
-        if (_left) {
+        if (controls.left) {
             velocity.x = -speed;
-        } else if (_right) {
+        } else if (controls.right) {
             velocity.x = speed;
         } else {
             velocity.x = 0;
@@ -78,20 +80,14 @@ class Player extends FlxSprite
     }
 
     private function animations() {
-        if (playable) {
-            _up = FlxG.keys.anyPressed([UP, W]);
-            _down = FlxG.keys.anyPressed([DOWN, S]);
-            _left = FlxG.keys.anyPressed([LEFT, A]);
-            _right = FlxG.keys.anyPressed([RIGHT, D]);
-        }
 
-        if (_up) {
+        if (controls.up) {
             animation.play('Up');
-        } else if (_down) {
+        } else if (controls.down) {
             animation.play('Down');
-        } else if (_left) {
+        } else if (controls.left) {
             animation.play('Left');
-        } else if (_right) {
+        } else if (controls.right) {
             animation.play('Right');
         }
 

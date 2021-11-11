@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.FlxG;
 class Cutscene extends FlxState
@@ -21,6 +22,42 @@ class Cutscene extends FlxState
     override public function create() {
             super.create();
         }
+
+        
+    // * six directional cutscene moment    
+    public function sixDirMoveTo(xTo:Float, yTo:Float, char:FlxSprite, speed:Float) {
+        if (char.x > xTo) {
+            char.velocity.x = speed;
+        } else if (xTo > char.x) {
+            char.velocity.x = -speed;
+        } else {
+            char.velocity.x = 0;
+        }
+
+        if (char.y > yTo) {
+            char.velocity.y = speed;
+        } else if (yTo > char.y) {
+            char.velocity.y = -speed;
+        } else {
+            char.velocity.y = 0;
+        }
+    }
+
+    // * four directional cutscene movement
+    public function fourDirMoveTo(xTo:Float, yTo:Float, char:FlxSprite, speed:Float) {
+        if (char.x > xTo) {
+            char.velocity.x = speed;
+        } else if (xTo > char.x) {
+            char.velocity.x = -speed;
+        } else if (char.y > yTo) {
+            char.velocity.y = speed;
+        } else if (yTo > char.y) {
+            char.velocity.y = -speed;
+        } else {
+            char.velocity.x = 0;
+            char.velocity.y = 0;
+        }
+    }
 
     public function moveto(xto:Float, yto:Float, char){
         xx = char.x;
