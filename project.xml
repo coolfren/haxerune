@@ -15,10 +15,10 @@
 	<haxelib name="flixel" />
 	<haxedev set='webgl' />
 	<haxelib name="flixel-addons" />
+	<haxelib name="flixel-ui"/>
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
-	<haxelib name="random"/>
 	<haxelib name="discord_rpc" if="desktop"/>
 	<haxelib name="hscript"/>
 	

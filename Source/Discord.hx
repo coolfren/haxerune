@@ -1,9 +1,11 @@
 package;
+import flixel.FlxG;
 #if !neko
 #if desktop
 import Sys.sleep;
 import discord_rpc.DiscordRpc;
-import Random;
+import flixel.math.FlxRandom;
+
 
 using StringTools;
 
@@ -38,11 +40,11 @@ class DiscordClient
 	static function onReady()
 	{
         var alt = '';
-        if(Random.bool()){
+        if(FlxG.random.bool()){
             alt = '-alt';
         }
         else{
-            var uwu:Bool = (Random.int(1,100) == 1);
+            var uwu:Bool = (FlxG.random.int(1,100) == 1);
             if(uwu){
                 alt = '-alt2';
             }
@@ -88,11 +90,11 @@ class DiscordClient
 		}
         var alt = '';
         
-        if(Random.bool() && !forcedfunny){
+        if(FlxG.random.bool() && !forcedfunny){
             alt = '-alt';
         }
         else{
-            var uwu:Bool = (Random.int(1,100) == 1);
+            var uwu:Bool = (FlxG.random.int(1,100) == 1);
             if(uwu || forcedfunny){
                 alt = '-alt2';
             }
