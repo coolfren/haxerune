@@ -12,3 +12,4 @@ funny contributers
 | name   | github                                 | newgrounds                                     |
 |--------|----------------------------------------|------------------------------------------------|
 |vidyagirl|[github](https://github.com/vidyagirl)|[newgrounds](https://radiantnora.newgrounds.com/)|
+|NLD      |[github](https://github.com/NLD-Dev) 
