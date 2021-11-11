@@ -28,7 +28,7 @@ class PlayState extends FlxState
     var hittabletiles:FlxTypedGroup<Tiles>;
     var dataarray:Array<Float> = [];
     var MapData:Array<Array<Array<Dynamic>>>;
-    var kris:Player;
+    public static var kris:Player;
 
     public static var saveName:String;
     public static var curLevel:String;
