@@ -9,8 +9,10 @@ import sys.FileSystem;
 #end
 class Tiles extends FlxSprite{
     var animations:Array<String>;
-    public function new(tilename:String, tilesheet:String, ?X:Float = 0, ?Y:Float = 0){
+    var type:String = '';
+    public function new(tilename:String, tilesheet:String, ?X:Float = 0, ?Y:Float = 0, ?type:String){
         super(X,Y);
+        this.type = type;
         loadGraphic('assets/tiles/$tilename.png');
         //animations = coolTextFile('assets/tiles/$tilesheet.txt');
         //trace(animations);
@@ -37,5 +39,14 @@ class Tiles extends FlxSprite{
         }*/
         //setGraphicSize(Std.int(width * 1.13));
        // updateHitbox();
+    }
+
+    function doShit() {
+        switch (type) {
+            case 'pipi':
+                // fight scene stuff
+            default:
+                // nothing lol
+        }
     }
 }

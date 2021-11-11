@@ -19,6 +19,7 @@ import openfl.Assets;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import Save;
 
 import flixel.addons.transition.FlxTransitionableState;
 class PlayState extends FlxState
@@ -27,7 +28,14 @@ class PlayState extends FlxState
     var tiles:FlxTypedSpriteGroup<Tiles>;
     var dataarray:Array<Float> = [];
     var MapData:Array<Array<Array<Dynamic>>>;
-    var kris:Player;
+    public static var kris:Player;
+
+    public static var saveName:String;
+    public static var curLevel:String;
+    public static var saveTimeElapsed:Float;
+    public static var latestSavePoint:Int;
+
+
     public function new(){
         MapData = [
             [['top_left_dark', '', 1],['left_right_top_dark', '', 2],     ['left_right_top_dark','',3], ['left_right_top_dark', '', 4],['top_right_dark', '', 5]],
@@ -46,8 +54,12 @@ class PlayState extends FlxState
         tiles = new FlxTypedSpriteGroup(0,0);
         super();
     }
+    
     override public function create()
     {
+
+        HScriptUtil.initVariables();
+
         kris = new Player(200,200, 'kris');
         add(tiles);
         var prevData:Int = -1;
@@ -77,8 +89,10 @@ class PlayState extends FlxState
                 tiles.add(temptile);
             }
         }
-        add(kris);
 
+        // vidyagirL: haha jonathan imagine knowing how tiles work
+
+        add(kris);
         //justneeded this one time, feel free to delete ig
         trace(FlxG.width);
         trace(FlxG.height);
