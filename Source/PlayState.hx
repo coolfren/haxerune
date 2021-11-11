@@ -19,23 +19,22 @@ import openfl.Assets;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import Save;
-
+import flixel.FlxObject;
 import flixel.addons.transition.FlxTransitionableState;
 class PlayState extends FlxState
 {
     var tilesheet:Array<FlxSprite> = [];
-    var tiles:FlxTypedSpriteGroup<Tiles>;
+    var tiles:FlxTypedGroup<Tiles>;
+    var hittabletiles:FlxTypedGroup<Tiles>;
     var dataarray:Array<Float> = [];
     var MapData:Array<Array<Array<Dynamic>>>;
-    public static var kris:Player;
+    var kris:Player;
 
     public static var saveName:String;
     public static var curLevel:String;
     public static var saveTimeElapsed:Float;
     public static var latestSavePoint:Int;
-
-
+    
     public function new(){
         MapData = [
             [['top_left_dark', '', 1],['left_right_top_dark', '', 2],     ['left_right_top_dark','',3], ['left_right_top_dark', '', 4],['top_right_dark', '', 5]],
@@ -51,48 +50,52 @@ class PlayState extends FlxState
 			DiscordClient.shutdown();
 		 });
 		#end
-        tiles = new FlxTypedSpriteGroup(0,0);
+        tiles = new FlxTypedGroup();
+        hittabletiles = new FlxTypedGroup();
         super();
     }
-    
+
     override public function create()
     {
-
-        HScriptUtil.initVariables();
-
+        FlxG.worldBounds.set(0,0,FlxG.width,FlxG.height);
         kris = new Player(200,200, 'kris');
-        add(tiles);
         var prevData:Int = -1;
         var yTilePos:Int = 0;
+        
         for(i in 0...MapData.length){
             var tempdata:Array<Array<Dynamic>> = MapData[i];
             var inttesty:Int = i;
-        for(i in 0...tempdata.length){
-                var moretemp:Array<Dynamic> = tempdata[i];
-                var temptile = new Tiles(moretemp[0], moretemp[1], 0, 0);
-                //temptile.x = ((FlxG.width/2) - ((tempdata.length/2) * (temptile.width*(tempdata.length/2)))) + temptile.width;
-                //temptile.y = (FlxG.height/2) - ((MapData.length/2) * temptile.height);
-                temptile.x -= temptile.width;
-                if(i == 0 && inttesty == 0){
-                    temptile.x = 0 - temptile.width;
-                    temptile.y = 0;
-                }
-                if(moretemp[2] >= prevData){
-                    temptile.x += (moretemp[2] * temptile.width);
-                    temptile.y += (yTilePos * temptile.height);
-                }else{
-                    yTilePos++;
-                    temptile.y += (yTilePos * temptile.height);
-                    temptile.x += (moretemp[2] * temptile.width);
-                }
-                prevData = moretemp[2];
-                tiles.add(temptile);
+            for(i in 0...tempdata.length){
+                    var moretemp:Array<Dynamic> = tempdata[i];
+                    var temptile = new Tiles(moretemp[0], moretemp[1], 0, 0);
+                    temptile.x -= temptile.width;
+                    if(i == 0 && inttesty == 0){
+                        temptile.x = 0 - temptile.width;
+                        temptile.y = 0;
+                    }
+                    if(moretemp[2] >= prevData){
+                        temptile.x += (moretemp[2] * temptile.width);
+                        temptile.y += (yTilePos * temptile.height);
+                    }else{
+                        yTilePos++;
+                        temptile.y += (yTilePos * temptile.height);
+                        temptile.x += (moretemp[2] * temptile.width);
+                    }
+                    prevData = moretemp[2];
+                    if(temptile.ISHITABBLE){
+                        temptile.immovable = true;
+                        hittabletiles.add(temptile);   
+                        trace('added this bitch to hittable');
+                    }else{
+                        tiles.add(temptile);
+                    }
             }
         }
 
-        // vidyagirL: haha jonathan imagine knowing how tiles work
-
+        add(tiles);
+        add(hittabletiles);
         add(kris);
+
         //justneeded this one time, feel free to delete ig
         trace(FlxG.width);
         trace(FlxG.height);
@@ -105,15 +108,18 @@ class PlayState extends FlxState
     }
     override public function update(elapsed:Float){
         super.update(elapsed);
+        //FlxG.collide(kris,hittabletiles, processCollisions);
         //debug testing for fighting ig
         if (FlxG.keys.justPressed.SEVEN)
             FlxG.switchState(new FightScene());
         #if desktop
         #if debug
+
+        FlxG.collide(kris, hittabletiles);
+
         if (FlxG.keys.justPressed.EIGHT)
             DiscordClient.changePresence('rn codin\' shit in', 'PlayState', null, null, null, true); 
         #end
         #end
     }
-    
 }
