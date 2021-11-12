@@ -28,7 +28,7 @@ class PlayState extends FlxState
     var hittabletiles:FlxTypedSpriteGroup<Tiles>;
     var dataarray:Array<Float> = [];
     var MapData:Array<Array<Array<Dynamic>>>;
-    var kris:Player;
+    public static var kris:Player;
 
     public static var saveName:String;
     public static var curLevel:String;
@@ -39,8 +39,8 @@ class PlayState extends FlxState
         MapData = [
             [['top_left_dark', '', 1],['left_right_top_dark', '', 2],     ['left_right_top_dark','',3], ['left_right_top_dark', '', 4],['top_right_dark', '', 5]],
             [['up_down_left_dark','', 1],    ['left_right_bottom_dark','', 2],['left_right_bottom_dark','', 3], ['middle_walkway_dark', '',4],['up_down_right_dark', '', 5]],
-            [['up_down_left_dark','',1],     ['empty','',2],           ['empty','',3], ['empty', '', 4],['up_down_right_dark','',5]],
-            [['up_down_left_dark','',1],     ['empty', '',2],          ['empty', '', 3], ['empty', '', 4],['up_down_right_dark', '', 5]],
+            [['up_down_left_dark','',1],     ['empty','',2, 'hit'],           ['empty','',3, 'hit'], ['empty', '', 4, 'hit'],['up_down_right_dark','',5]],
+            [['up_down_left_dark','',1],     ['empty', '',2, 'hit'],          ['empty', '', 3, 'hit'], ['empty', '', 4, 'hit'],['up_down_right_dark', '', 5]],
             [['bottom_left_dark', '', 1],  ['left_right_bottom_dark', '', 2],['left_right_bottom_dark','', 3],['left_right_bottom_dark', '', 4], ['bottom_right_corner_dark', '', 5]]
         ];
         #if desktop
@@ -66,29 +66,30 @@ class PlayState extends FlxState
             var tempdata:Array<Array<Dynamic>> = MapData[i];
             var inttesty:Int = i;
             for(i in 0...tempdata.length){
-                    var moretemp:Array<Dynamic> = tempdata[i];
-                    var temptile = new Tiles(moretemp[0], moretemp[1], 0, 0);
-                    temptile.x -= temptile.width;
-                    if(i == 0 && inttesty == 0){
-                        temptile.x = 0 - temptile.width;
-                        temptile.y = 0;
-                    }
-                    if(moretemp[2] >= prevData){
-                        temptile.x += (moretemp[2] * temptile.width);
-                        temptile.y += (yTilePos * temptile.height);
-                    }else{
-                        yTilePos++;
-                        temptile.y += (yTilePos * temptile.height);
-                        temptile.x += (moretemp[2] * temptile.width);
-                    }
-                    prevData = moretemp[2];
-                    if(temptile.ISHITABBLE){
+                var moretemp:Array<Dynamic> = tempdata[i];
+                var temptile = new Tiles(moretemp[0], moretemp[1], 0, 0);
+                temptile.x -= temptile.width;
+                if(i == 0 && inttesty == 0){
+                    temptile.x = 0 - temptile.width;
+                    temptile.y = 0;
+                }
+                if(moretemp[2] >= prevData){
+                    temptile.x += (moretemp[2] * temptile.width);
+                    temptile.y += (yTilePos * temptile.height);
+                }else{
+                    yTilePos++;
+                    temptile.y += (yTilePos * temptile.height);
+                    temptile.x += (moretemp[2] * temptile.width);
+                }
+                prevData = moretemp[2];
+                switch(temptile.Type){
+                    case "hit":
                         temptile.immovable = true;
                         hittabletiles.add(temptile);   
                         trace('added this bitch to hittable');
-                    }else{
+                    default:
                         tiles.add(temptile);
-                    }
+                }
             }
         }
 
