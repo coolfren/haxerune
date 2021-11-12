@@ -112,14 +112,10 @@ class PlayState extends FlxState
         //debug testing for fighting ig
         if (FlxG.keys.justPressed.SEVEN)
             FlxG.switchState(new FightScene());
-        #if desktop
-        #if debug
-
         FlxG.collide(kris, hittabletiles);
-
+        #if (debug && desktop)
         if (FlxG.keys.justPressed.EIGHT)
             DiscordClient.changePresence('rn codin\' shit in', 'PlayState', null, null, null, true); 
-        #end
         #end
     }
 }
