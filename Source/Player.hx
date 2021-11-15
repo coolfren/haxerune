@@ -28,8 +28,7 @@ class Player extends FlxSprite
         super(X,Y);
         trace("*god FUCKING damnit KRIS where the FUCK are we?!");
         trace("*we're at " + x + " " + y);
-        // drag.x = drag.y = 1600;
-        //basicly the same to character.hx in fnf lmao just bit dif
+
         switch(char){
             case 'kris':
             frames = Paths.fromJson('assets/characters/Kris');

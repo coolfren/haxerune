@@ -67,7 +67,7 @@ class PlayState extends FlxState
             var inttesty:Int = i;
             for(i in 0...tempdata.length){
                 var moretemp:Array<Dynamic> = tempdata[i];
-                var temptile = new Tiles(moretemp[0], moretemp[1], 0, 0);
+                var temptile = new Tiles(moretemp[0], moretemp[1], 0, 0, moretemp[3]);
                 temptile.x -= temptile.width;
                 if(i == 0 && inttesty == 0){
                     temptile.x = 0 - temptile.width;
@@ -100,9 +100,8 @@ class PlayState extends FlxState
         //justneeded this one time, feel free to delete ig
         trace(FlxG.width);
         trace(FlxG.height);
-        //might re add the music later lmao //ahah funni queen momento
         if(FlxG.sound.music == null)
-            FlxG.sound.playMusic('assets/mus/queen_boss.ogg',1,true);
+            FlxG.sound.playMusic(Paths.Music("fuck me im testing the uhhhh, mf placeholding music"),1,true); //testing if placehold mus works or whatev
         #if desktop
         DiscordClient.changePresence('rn codin\' shit in', 'PlayState', null, 0); 
         #end
