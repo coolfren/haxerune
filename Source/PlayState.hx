@@ -29,7 +29,7 @@ class PlayState extends FlxState
     var dataarray:Array<Float> = [];
     var MapData:Array<Array<Array<Dynamic>>>;
     public static var kris:Player;
-
+    var hitboxes:FlxTypedSpriteGroup<FlxSprite>;
     public static var saveName:String;
     public static var curLevel:String;
     public static var saveTimeElapsed:Float;
@@ -52,6 +52,7 @@ class PlayState extends FlxState
 		#end
         tiles = new FlxTypedSpriteGroup(0,0);
         hittabletiles = new FlxTypedSpriteGroup(0,0);
+        hitboxes = new FlxTypedSpriteGroup(0,0);
         super();
     }
 
@@ -61,6 +62,7 @@ class PlayState extends FlxState
         kris = new Player(200,200, 'kris');
         var prevData:Int = -1;
         var yTilePos:Int = 0;
+        hitboxes.add(kris.hitbox);
         
         for(i in 0...MapData.length){
             var tempdata:Array<Array<Dynamic>> = MapData[i];
@@ -96,12 +98,13 @@ class PlayState extends FlxState
         add(tiles);
         add(hittabletiles);
         add(kris);
+        add(hitboxes);
 
         //justneeded this one time, feel free to delete ig
         trace(FlxG.width);
         trace(FlxG.height);
         if(FlxG.sound.music == null)
-            FlxG.sound.playMusic(Paths.Music("fuck me im testing the uhhhh, mf placeholding music"),1,true); //testing if placehold mus works or whatev
+            FlxG.sound.playMusic(Paths.Music("lancer"),1,true); //testing if placehold mus works or whatev
         #if desktop
         DiscordClient.changePresence('rn codin\' shit in', 'PlayState', null, 0); 
         #end
@@ -110,9 +113,11 @@ class PlayState extends FlxState
         super.update(elapsed);
         //FlxG.collide(kris,hittabletiles, processCollisions);
         //debug testing for fighting ig
+        #if debug
         if (FlxG.keys.justPressed.SEVEN)
-            FlxG.switchState(new FightScene());
-        FlxG.collide(kris, hittabletiles);
+            FlxG.switchState(new debugs.Testcut());
+        #end
+        FlxG.collide(hitboxes, hittabletiles);
         #if (debug && desktop)
         if (FlxG.keys.justPressed.EIGHT)
             DiscordClient.changePresence('rn codin\' shit in', 'PlayState', null, null, null, true); 

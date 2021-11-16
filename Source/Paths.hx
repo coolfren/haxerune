@@ -7,18 +7,22 @@ import openfl.Assets;
 
 import flixel.graphics.frames.FlxAtlasFrames;
 class Paths{
+    public static function getImage(Path:String){
+        return "assets/Images/" + Path;
+    }
     public static function getSparowAtlas(Path:String){
         ColorTraces.traceRed('loadin animations from $Path');
         return FlxAtlasFrames.fromSparrow(Path + '.png', Path + '.xml');
     }
     public static function fromJson(Path:String){
         ColorTraces.traceRed('loadin animations from $Path');
+        ColorTraces.traceRed('path exists = ' + exists(Path));
         return FlxAtlasFrames.fromTexturePackerJson(Path + '.png', Path + '.json');
     }
     public static function Music(Path:String) {
         Path = Path + ".ogg";
         ColorTraces.traceRed('loadin song from assets/mus/$Path \n');
-        ColorTraces.traceRed('path exists = ' + exists("assets/mus/" + Path + "\n"));
+        ColorTraces.traceRed('path exists = ' + exists("assets/mus/" + Path) + "\n");
         
         if(exists("assets/mus/" + Path)){
             return "assets/mus/" + Path;

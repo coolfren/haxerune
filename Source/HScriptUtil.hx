@@ -17,10 +17,11 @@ class HScriptUtil {
         setVar("latestSavePoint", PlayState.latestSavePoint);
         setVar("saveName", PlayState.saveName);
         setVar("saveTimeElapsed", PlayState.saveTimeElapsed);
+        setVar("Paths", Paths);
     }
 
     public static function exec(code:String) {
-        interp.execute(parser.parseString(code));
+        trace( interp.execute(parser.parseString(code)));
     }
     
     public static function setVar(hscriptVariable:String, variable:Dynamic) {
