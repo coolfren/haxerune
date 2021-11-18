@@ -9,17 +9,19 @@ import openfl.Assets;
 
 
 class Testcut extends FlxState{
+    var cutscene:HScriptUtil = new HScriptUtil();
     var sprites:FlxTypedSpriteGroup<FlxSprite>;
     public function new(){
         super();
+        add(cutscene);
         sprites = new FlxTypedSpriteGroup(0,0);
         add(sprites);
-        HScriptUtil.initVariables(); 
-        HScriptUtil.setVar("sprites", sprites);
-        HScriptUtil.setVar("timer", FlxTimer);
-        HScriptUtil.setVar("fadein", fadein);
+        cutscene.initVariables(); 
+        cutscene.setVar("sprites", sprites);
+        cutscene.setVar("timer", FlxTimer);
+        cutscene.setVar("fadein", fadein);
         trace(Assets.getText("assets/hscript/debug.hscript"));
-        HScriptUtil.exec(Assets.getText("assets/hscript/debug.hscript"));
+        cutscene.exec(Assets.getText("assets/hscript/debug.hscript"));
     }
     public static function fadein(sprite:FlxSprite){
         for(i in 0...100){

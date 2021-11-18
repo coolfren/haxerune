@@ -3,12 +3,12 @@ package;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import hscript.*;
+import flixel.FlxObject;
+class HScriptUtil extends FlxObject {
+    public var interp:Interp = new Interp();
+    public var parser:Parser = new Parser();
 
-class HScriptUtil {
-    public static var interp:Interp = new Interp();
-    public static var parser:Parser = new Parser();
-
-    public static function initVariables() {
+    public function initVariables() {
         setVar("Math", Math);
         setVar("FlxG", FlxG);
         setVar("FlxSprite", FlxSprite);
@@ -20,11 +20,11 @@ class HScriptUtil {
         setVar("Paths", Paths);
     }
 
-    public static function exec(code:String) {
+    public function exec(code:String) {
         trace( interp.execute(parser.parseString(code)));
     }
     
-    public static function setVar(hscriptVariable:String, variable:Dynamic) {
+    public function setVar(hscriptVariable:String, variable:Dynamic) {
         interp.variables.set(hscriptVariable, variable);
     }
 }
