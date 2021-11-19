@@ -18,6 +18,7 @@ class HScriptUtil extends FlxObject {
         setVar("saveName", PlayState.saveName);
         setVar("saveTimeElapsed", PlayState.saveTimeElapsed);
         setVar("Paths", Paths);
+        setVar("Std", Std);
     }
 
     public function exec(code:String, func:String = 'main') {

@@ -6,6 +6,11 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import openfl.Assets;
+import flixel.FlxG;
+import flixel.util.FlxColor;
+import flixel.system.FlxSound;
+import openal.*;
+
 
 
 class Testcut extends FlxState{
@@ -17,18 +22,19 @@ class Testcut extends FlxState{
         sprites = new FlxTypedSpriteGroup(0,0);
         add(sprites);
         cutscene.initVariables(); 
+        var uwu = new FlxSprite();
+        uwu.makeGraphic(FlxG.width,Std.int(FlxG.height / 5),FlxColor.BLACK);
         cutscene.setVar("sprites", sprites);
         cutscene.setVar("FlxTimer", FlxTimer);
         cutscene.setVar("Controls", Controls);
-        cutscene.setVar("images", sprites.members);
-        //cutscene.setVar("FlxTween", FlxTween)
+        cutscene.setVar("setpitch", repitchmus);
+        //cutscene.setVar("FlxTween", FlxTween)s //ah yes, S
         trace("\n" + Assets.getText("assets/hscript/debug.hx"));
         cutscene.exec(Assets.getText("assets/hscript/debug.hx"));
         var main = cutscene.get("main"); 
         if(main != null){
             main();
         }
-    
     }
     override public function update(elapsed:Float){
         super.update(elapsed);
@@ -37,4 +43,10 @@ class Testcut extends FlxState{
             updateuwu();
         }
     }
+
+    function repitchmus(percentage:Int = 1){
+        @:privateAccess
+            lime.media.openal.AL.sourcef(FlxG.sound.music._channel.__source.__backend.handle, lime.media.openal.AL.PITCH, percentage);
+    }//dont
+    //it commits null object reference
 }
