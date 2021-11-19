@@ -1,7 +1,0 @@
-var thing; 
-thing = new FlxSprite(0,0);
-thing.loadGraphic(Paths.getImage("spr_introimage0_0.png"));
-thing.x = (FlxG.width / 2) - (thing.width / 2);
-sprites.add(thing);
-thing.alpha = 0.5;
-FlxG.sound.playMusic(Paths.Music("legend"),1,true);

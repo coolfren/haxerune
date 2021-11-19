@@ -1,5 +1,5 @@
 package;
-
+import haxe.macro.Expr;
 import flixel.FlxSprite;
 import flixel.FlxG;
 import hscript.*;
@@ -20,11 +20,14 @@ class HScriptUtil extends FlxObject {
         setVar("Paths", Paths);
     }
 
-    public function exec(code:String) {
-        trace( interp.execute(parser.parseString(code)));
+    public function exec(code:String, func:String = 'main') {
+        trace( interp.execute(parser.parseString(code, ".hx")) );
     }
-    
+
     public function setVar(hscriptVariable:String, variable:Dynamic) {
         interp.variables.set(hscriptVariable, variable);
     }
+    public inline function get(name:String):Dynamic {
+		return interp.variables.get(name);
+	}
 }

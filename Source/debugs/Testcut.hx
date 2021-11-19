@@ -18,14 +18,23 @@ class Testcut extends FlxState{
         add(sprites);
         cutscene.initVariables(); 
         cutscene.setVar("sprites", sprites);
-        cutscene.setVar("timer", FlxTimer);
-        cutscene.setVar("fadein", fadein);
-        trace(Assets.getText("assets/hscript/debug.hscript"));
-        cutscene.exec(Assets.getText("assets/hscript/debug.hscript"));
+        cutscene.setVar("FlxTimer", FlxTimer);
+        cutscene.setVar("Controls", Controls);
+        cutscene.setVar("images", sprites.members);
+        //cutscene.setVar("FlxTween", FlxTween)
+        trace("\n" + Assets.getText("assets/hscript/debug.hx"));
+        cutscene.exec(Assets.getText("assets/hscript/debug.hx"));
+        var main = cutscene.get("main"); 
+        if(main != null){
+            main();
+        }
+    
     }
-    public static function fadein(sprite:FlxSprite){
-        for(i in 0...100){
-            sprite.alpha = i / 100;
+    override public function update(elapsed:Float){
+        super.update(elapsed);
+        var updateuwu = cutscene.get("update");
+        if(updateuwu != null){
+            updateuwu();
         }
     }
 }
