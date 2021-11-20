@@ -18,7 +18,6 @@ class Testcut extends FlxState{
     var sprites:FlxTypedSpriteGroup<FlxSprite>;
     public function new(){
         super();
-        add(cutscene);
         sprites = new FlxTypedSpriteGroup(0,0);
         add(sprites);
         cutscene.initVariables(); 

@@ -10,6 +10,11 @@ class Paths{
     public static function getImage(Path:String){
         return "assets/Images/" + Path;
     }
+
+    public static function getVideo(Path:String) {
+        return 'assets/videos/$Path.webm';
+    }
+
     public static function getSparowAtlas(Path:String){
         ColorTraces.traceRed('loadin animations from $Path');
         return FlxAtlasFrames.fromSparrow(Path + '.png', Path + '.xml');

@@ -11,15 +11,25 @@
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="false" vsync="false"/>
 	<window width="640" height="480" fps="" background="#000000" hardware="true" vsync="false" />
 	
+
 	<assets path="Assets" rename="assets" />
+
+	<!-- Flixel Libraries-->
+
 	<haxelib name="flixel" />
-	<haxedev set='webgl' />
 	<haxelib name="flixel-addons" />
 	<haxelib name="flixel-ui"/>
+
+	<!-- Flixel Settings-->
+
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 	<haxedef name="FLX_NO_DEBUG" unless="debug" />
 	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+
+	<!-- Other Libraries-->
+
 	<haxelib name="discord_rpc" if="desktop"/>
 	<haxelib name="hscript"/>
+	<haxelib name="extension-webm"/>
 	
 </project>

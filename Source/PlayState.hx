@@ -23,6 +23,7 @@ import flixel.FlxObject;
 import flixel.addons.transition.FlxTransitionableState;
 class PlayState extends FlxState
 {
+
     var tilesheet:Array<FlxSprite> = [];
     var tiles:FlxTypedSpriteGroup<Tiles>;
     var hittabletiles:FlxTypedSpriteGroup<Tiles>;
@@ -35,6 +36,8 @@ class PlayState extends FlxState
     public static var saveTimeElapsed:Float;
     public static var latestSavePoint:Int;
     
+    var hscript:HScriptUtil = new HScriptUtil();
+
     public function new(){
         MapData = [
             [['top_left_dark', '', 1],['left_right_top_dark', '', 2],     ['left_right_top_dark','',3], ['left_right_top_dark', '', 4],['top_right_dark', '', 5]],
@@ -58,6 +61,7 @@ class PlayState extends FlxState
 
     override public function create()
     {
+
         FlxG.worldBounds.set(0,0,FlxG.width,FlxG.height);
         kris = new Player(200,200, 'kris');
         var prevData:Int = -1;
@@ -108,7 +112,9 @@ class PlayState extends FlxState
         #if desktop
         DiscordClient.changePresence('rn codin\' shit in', 'PlayState', null, 0); 
         #end
+
     }
+
     override public function update(elapsed:Float){
         super.update(elapsed);
         //FlxG.collide(kris,hittabletiles, processCollisions);
