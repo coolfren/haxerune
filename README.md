@@ -14,3 +14,4 @@ funny contributers
 |--------|----------------------------------------|------------------------------------------------|
 |vidyagirl|[github](https://github.com/vidyagirl)|[newgrounds](https://radiantnora.newgrounds.com/)|
 |NLD      |[github](https://github.com/NLD-Dev) 
+|Bit Of Trolling|[github](https://github.com/coolfren)
