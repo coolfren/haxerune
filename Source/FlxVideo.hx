@@ -22,6 +22,7 @@ class FlxVideo extends FlxBasic
 		// set up the player
 		var io:WebmIoFile = new WebmIoFile(webmPath);
 		var player:WebmPlayer = new WebmPlayer();
+        player.fuck(io, true);
 
 		// listen to some events (optional)
 		player.addEventListener('play', function(e)
@@ -35,6 +36,7 @@ class FlxVideo extends FlxBasic
 		player.addEventListener('stop', function(e)
 		{
 			trace('stop!');
+            FlxG.sound.music.play();
 		});
 
 		// WebmPlayer extends Bitmap
