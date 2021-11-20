@@ -46,7 +46,7 @@ class PlayState extends FlxState
             [['up_down_left_dark','',1],     ['empty', '',2, 'hit'],          ['empty', '', 3, 'hit'], ['empty', '', 4, 'hit'],['up_down_right_dark', '', 5]],
             [['bottom_left_dark', '', 1],  ['left_right_bottom_dark', '', 2],['left_right_bottom_dark','', 3],['left_right_bottom_dark', '', 4], ['bottom_right_corner_dark', '', 5]]
         ];
-        #if desktop
+        #if (desktop && cpp)
 		DiscordClient.initialize();
 		
 		Application.current.onExit.add (function (exitCode) {
@@ -109,7 +109,7 @@ class PlayState extends FlxState
         trace(FlxG.height);
         if(FlxG.sound.music == null)
             FlxG.sound.playMusic(Paths.Music("lancer"),1,true); //testing if placehold mus works or whatev
-        #if desktop
+        #if (desktop && cpp)
         DiscordClient.changePresence('rn codin\' shit in', 'PlayState', null, 0); 
         #end
 
@@ -117,11 +117,15 @@ class PlayState extends FlxState
 
     override public function update(elapsed:Float){
         super.update(elapsed);
+
         //FlxG.collide(kris,hittabletiles, processCollisions);
         //debug testing for fighting ig
         #if debug
         if (FlxG.keys.justPressed.SEVEN)
             FlxG.switchState(new debugs.Testcut());
+        if (FlxG.keys.justPressed.EIGHT){
+            persistentUpdate = false;
+            openSubState(new FightScene());}
         #end
         FlxG.collide(hitboxes, hittabletiles);
         #if (debug && desktop)
