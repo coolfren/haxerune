@@ -8,11 +8,9 @@ import lime.app.Application;
 #if cpp
 import sys.io.File;
 #end
-#if !neko
 #if desktop 
 import Discord.DiscordClient;
 import sys.thread.Thread;
-#end
 #end
 import flixel.graphics.frames.FlxFrame;
 import openfl.Assets;
@@ -129,7 +127,7 @@ class PlayState extends FlxState
         #end
         FlxG.collide(hitboxes, hittabletiles);
         #if (debug && desktop)
-        if (FlxG.keys.justPressed.EIGHT)
+        if (FlxG.keys.justPressed.ONE)
             DiscordClient.changePresence('rn codin\' shit in', 'PlayState', null, null, null, true); 
         #end
     }

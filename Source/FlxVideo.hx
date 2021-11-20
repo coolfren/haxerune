@@ -22,8 +22,8 @@ class FlxVideo extends FlxBasic
 
 		// set up the player
 		var io:WebmIoFile = new WebmIoFile(webmPath);
-		var player:WebmPlayer = new WebmPlayer();
-        player.fuck(io, true);
+		var player:WebmPlayer = new WebmPlayer(io, true);
+        //player.fuck(io, true);
 
 		// listen to some events (optional)
 		player.addEventListener(WebmEvent.PLAY, function(e)

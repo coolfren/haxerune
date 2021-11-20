@@ -1,7 +1,7 @@
 var testnumb = 0;
 var tweentimer = 5;
 var thing = new FlxSprite(0,0);
-var donetweenthing = false;
+var state = 'movingimage';
 //this some lua modchart type shit lmao
 function main(){
     //var textbox = new FlxSprite.
@@ -10,9 +10,9 @@ function main(){
     textbox.y = FlxG.height - textbox.height;
     thing.setGraphicSize(Std.int(thing.width * 2));
     thing.x = (FlxG.width / 2) - (thing.width / 2);
-    sprites.add(thing);
-    sprites.add(textbox);
-    sprites.members[0].y = (-testnumb / 2.3) + (sprites.members[0].height / 2);
+    game.add(thing);
+    game.add(textbox);
+    thing.y = (-testnumb / 2.3) + (thing.height / 2);
     //thing.alpha = 0.2;
     FlxG.sound.music.stop();
     //setpitch(0.75);
@@ -25,12 +25,34 @@ function update(){
     trace(doit);
     
     if(doit){
-        if(testnumb < 1077)
-            sprites.members[0].y = (-testnumb / 2.15) + (sprites.members[0].height / 2);
-        tweentimer = testnumb + 5;
+        switch(state){
+            case 'movingimage':
+                thing.y = (-testnumb / 2) + (thing.height / 2);
+                tweentimer = testnumb + 5;
+                if(testnumb > 950){
+                    state = "tweenout";
+                    testnumb = 0;
+                    tweentimer = 5;
+                }
+            case 'tweenout':
+                if(testnumb > 300){
+                    if(!FlxG.sound.music.playing){
+                        FlxG.sound.music.play();
+                    }
+                    thing.alpha = -(((testnumb - 300) / 1.5) / 50) + 1; //rewritin dis one sec
+                    tweentimer = testnumb + 5;
+                    if(thing.alpha == 0){
+                        game.remove(thing);
+
+                    }
+                }else if(FlxG.sound.music.playing && testnumb > 100){
+                    FlxG.sound.music.pause();
+                }
+
+        }
     }
     trace(testnumb);
     trace(doit);
     //basicly this makes the effect that the normal cutscene goes through
-    testnumb += 1;
+    testnumb = testnumb +1;
 }

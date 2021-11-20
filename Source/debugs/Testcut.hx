@@ -9,24 +9,26 @@ import openfl.Assets;
 import flixel.FlxG;
 import flixel.util.FlxColor;
 import flixel.system.FlxSound;
-import openal.*;
-
+//import openal.*;
+//import openfl.media.Video;
 
 
 class Testcut extends FlxState{
     var cutscene:HScriptUtil = new HScriptUtil();
     var sprites:FlxTypedSpriteGroup<FlxSprite>;
+    //var video = new Video(FlxG.width, FlxG.height);
     public function new(){
         super();
         sprites = new FlxTypedSpriteGroup(0,0);
         add(sprites);
         cutscene.initVariables(); 
-        var uwu = new FlxSprite();
-        uwu.makeGraphic(FlxG.width,Std.int(FlxG.height / 5),FlxColor.BLACK);
-        cutscene.setVar("sprites", sprites);
+        //var uwu = new FlxSprite();
+        //uwu.makeGraphic(FlxG.width,Std.int(FlxG.height / 5),FlxColor.BLACK);
         cutscene.setVar("FlxTimer", FlxTimer);
         cutscene.setVar("Controls", Controls);
         cutscene.setVar("setpitch", repitchmus);
+        cutscene.setVar("game", this);
+
         //cutscene.setVar("FlxTween", FlxTween)s //ah yes, S
         trace("\n" + Assets.getText("assets/hscript/debug.hx"));
         cutscene.exec(Assets.getText("assets/hscript/debug.hx"));
