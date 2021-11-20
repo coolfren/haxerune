@@ -52,11 +52,7 @@ class Player extends FlxSprite
     }
     override public function update(elapsed:Float):Void
         {
-            _run = FlxG.keys.anyPressed([SHIFT]);
-            if(_run)
-                speed = 200;
-            else
-                speed = 100;
+            speed = FlxG.keys.pressed.SHIFT ? 200 : 100;
             // Thus movement logic will run every frame
             movement();
             animations();
