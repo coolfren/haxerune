@@ -7,6 +7,7 @@ To compile install these libraries:
 * [flixel-ui](https://lib.haxe.org/p/flixel-ui/1.0.2/)
 * [discord_rpc](https://github.com/Aidan63/linc_discord-rpc)
 * [hscript](https://lib.haxe.org/p/hscript)
+* [extension-webm](https://github.com/HaxeExtension/extension-webm)
 ---
 funny contributers
 | name   | github                                 | newgrounds                                     |
