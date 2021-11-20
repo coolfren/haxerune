@@ -9,6 +9,7 @@ import openfl.display.Bitmap;
 import openfl.display.Sprite;
 import webm.WebmIoFile;
 import webm.WebmPlayer;
+import webm.WebmEvent;
 
 class FlxVideo extends FlxBasic
 {
@@ -25,19 +26,27 @@ class FlxVideo extends FlxBasic
         player.fuck(io, true);
 
 		// listen to some events (optional)
-		player.addEventListener('play', function(e)
+		player.addEventListener(WebmEvent.PLAY, function(e)
 		{
 			trace('play!');
+            if (FlxG.sound.music.playing)
+                FlxG.sound.music.pause();
 		});
-		player.addEventListener('end', function(e)
+
+		player.addEventListener(WebmEvent.STOP, function(e)
+            {
+                trace('stop!');
+                FlxG.sound.music.play();
+            });
+
+		player.addEventListener(WebmEvent.COMPLETE, function(e)
 		{
 			trace('end!');
 		});
-		player.addEventListener('stop', function(e)
-		{
-			trace('stop!');
-            FlxG.sound.music.play();
-		});
+
+        player.addEventListener(WebmEvent.RESTART, function(e) {
+            trace('restarted!');
+        });
 
 		// WebmPlayer extends Bitmap
 		// so FlxSprite can be created from the underlying BitmapData
